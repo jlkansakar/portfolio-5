@@ -36,7 +36,7 @@ connection.query("select * from players", function (error, result) {
     })
 });
 
-// list for Celeste players
+// list of Celeste players
 connection.query("select * from players inner join games on players.gameID = games.gameID where games.gameID = 1", function (error, result) {
     if (error) throw error;
     app.get("/playerlist/celeste", (req, res) => {
@@ -44,7 +44,7 @@ connection.query("select * from players inner join games on players.gameID = gam
     })
 });
 
-// list for Ultrakill players
+// list of Ultrakill players
 connection.query("select * from players inner join games on players.gameID = games.gameID where games.gameID = 2", function (error, result) {
     if (error) throw error;
     app.get("/playerlist/ultrakill", (req, res) => {
@@ -52,7 +52,7 @@ connection.query("select * from players inner join games on players.gameID = gam
     })
 });
 
-// list for Super Mario 64 players
+// list of Super Mario 64 players
 connection.query("select * from players inner join games on players.gameID = games.gameID where games.gameID = 3", function (error, result) {
     if (error) throw error;
     app.get("/playerlist/supermario64", (req, res) => {
@@ -60,7 +60,7 @@ connection.query("select * from players inner join games on players.gameID = gam
     })
 });
 
-// list for Hitman Trilogy players
+// list of Hitman Trilogy players
 connection.query("select * from players inner join games on players.gameID = games.gameID where games.gameID = 4", function (error, result) {
     if (error) throw error;
     app.get("/playerlist/hitmantrilogy", (req, res) => {
@@ -68,11 +68,22 @@ connection.query("select * from players inner join games on players.gameID = gam
     })
 });
 
-// full list of both players and games combined into one table.
+// list of nationalities and the sum of appearances.
 
-connection.query("select * From players inner join games on players.gameID = games.gameID", function (error, result) {
+connection.query("select nationalityName, count(players.nationalityID) as amountOfPlayers from nationality inner join players on nationality.nationalityID = players.nationalityID group by players.nationalityID",
+    function (error, result) {
     if (error) throw error;
-    app.get("/fulllist", (req, res) => {
+    app.get("/playerlist/nationalitylist", (req, res) => {
+        res.send(result)
+    })
+});
+
+
+
+// full list of all entities combined.
+connection.query("select * From players inner join games on players.gameID = games.gameID inner join nationality on players.nationalityID = nationality.nationalityID", function (error, result) {
+    if (error) throw error;
+    app.get("/combinedlist", (req, res) => {
         res.send(result)
     })
 });
