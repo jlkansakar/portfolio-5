@@ -75,7 +75,4 @@ insert into players (runnerID, runnerName, nationalityID, leaderboardPosition, r
 insert into players (runnerID, runnerName, nationalityID, leaderboardPosition, runTime, runDate, gameID) values ("19", "Scruffyy", "12","4", "00:20:14", "2023-01-10", "4");
 insert into players (runnerID, runnerName, nationalityID, leaderboardPosition, runTime, runDate, gameID) values ("20", "YaBoyRTZ", "1", "5", "00:30:10", "2023-07-14", "4");
 
-select *
-from players
-inner join nationality on players.nationalityID = nationality.nationalityID
-inner join games on players.gameID = games.gameID;
+
