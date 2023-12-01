@@ -12,6 +12,7 @@ const connection = mysql.createConnection({
     database: "speedrun"
 });
 
+// check to see if connection is good.
 connection.connect((error) => {
     if (error) {
         console.log("Error")
@@ -88,6 +89,7 @@ connection.query("select * From players inner join games on players.gameID = gam
     })
 });
 
+// a check to see if connection is good.
 app.listen(port, () => {
     console.log(`speedrun is listening on port ${port}`)
 });
